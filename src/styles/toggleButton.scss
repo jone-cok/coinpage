@@ -1,0 +1,20 @@
+.casino-on {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: 0.4s;
+  background-image: url("../assets/casino_back.png");
+  background-size: cover;
+  border-radius: 160px;
+  
+}
+
+.sports-on {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transition: 0.4s;
+  background-image: url("../assets/casino_back.png");
+  background-size: cover;
+  border-radius: 160px;
+}

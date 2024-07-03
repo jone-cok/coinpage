@@ -6,9 +6,9 @@ import Footer from "./Footer";
 
 export default function Layout() {
   return (
-    <div className="" id="layout">
+    <div id="layout" className="bg-[#61bbc5]">
       <Header />
-      <div className="">
+      <div >
         <Suspense fallback={<PageLoading />}>
           <Outlet />
         </Suspense>

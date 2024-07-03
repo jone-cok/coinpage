@@ -1,89 +1,160 @@
-// import Logo from "@/assets/images/logo.png";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useUserContext } from "@/context/UserContext";
-import { signup } from "@/services/apis/auth";
-import { AuthResponse } from "@/types/auth.types";
-import { CustomToast } from "@/components/Toast";
-import path from "@/constants/path";
+// import { Component } from "react";
+// import { Navigate } from "react-router-dom";
+// import { Formik, Field, Form, ErrorMessage } from "formik";
+// import * as Yup from "yup";
+
+// import AuthService from "@/services/auth";
+
+// type Props = {};
+
+// type State = {
+//   redirect: string | null,
+//   username: string,
+//   password: string,
+//   loading: boolean,
+//   message: string
+// };
+
+// export default class Login extends Component<Props, State> {
+//   constructor(props: Props) {
+//     super(props);
+//     this.handleLogin = this.handleLogin.bind(this);
+
+//     this.state = {
+//       redirect: null,
+//       username: "",
+//       password: "",
+//       loading: false,
+//       message: ""
+//     };
+//   }
+
+//   componentDidMount() {
+//     const currentUser = AuthService.getCurrentUser();
+
+//     if (currentUser) {
+//       this.setState({ redirect: "/profile" });
+//     };
+//   }
+
+//   componentWillUnmount() {
+//     window.location.reload();
+//   }
+
+//   validationSchema() {
+//     return Yup.object().shape({
+//       username: Yup.string().required("This field is required!"),
+//       password: Yup.string().required("This field is required!"),
+//     });
+//   }
+
+//   handleLogin(formValue: { username: string; password: string }) {
+//     const { username, password } = formValue;
+
+//     this.setState({
+//       message: "",
+//       loading: true
+//     });
+
+
+//     AuthService.login(username, password).then(
+//       () => {
+//         this.setState({
+//           redirect: "/profile"
+//         });
+//       },
+//       error => {
+//         const resMessage =
+//           (error.response &&
+//             error.response.data &&
+//             error.response.data.message) ||
+//           error.message ||
+//           error.toString();
+
+//         this.setState({
+//           loading: false,
+//           message: resMessage
+//         });
+//       }
+//     );
+//   }
+
+//   render() {
+//     if (this.state.redirect) {
+//       return <Navigate to={this.state.redirect} />
+//     }
+
+//     const { loading, message } = this.state;
+
+//     const initialValues = {
+//       username: "",
+//       password: "",
+//     };
+
+//     <div className="col-md-12">
+//       <div className="card card-container">
+//         <img
+//           src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+//           alt="profile-img"
+//           className="profile-img-card"
+//         />
+
+//         <Formik
+//           initialValues={initialValues}
+//           validationSchema={this.validationSchema}
+//           onSubmit={this.handleLogin}
+//         >
+//           <Form>
+//             <div className="form-group">
+//               <label htmlFor="username">Username</label>
+//               <Field name="username" type="text" className="form-control" />
+//               <ErrorMessage
+//                 name="username"
+//                 component="div"
+//                 className="alert alert-danger"
+//               />
+//             </div>
+
+//             <div className="form-group">
+//               <label htmlFor="password">Password</label>
+//               <Field name="password" type="password" className="form-control" />
+//               <ErrorMessage
+//                 name="password"
+//                 component="div"
+//                 className="alert alert-danger"
+//               />
+//             </div>
+
+//             <div className="form-group">
+//               <button type="submit" className="btn btn-primary btn-block" disabled={loading}>
+//                 {loading && (
+//                   <span className="spinner-border spinner-border-sm"></span>
+//                 )}
+//                 <span>Login</span>
+//               </button>
+//             </div>
+
+//             {message && (
+//               <div className="form-group">
+//                 <div className="alert alert-danger" role="alert">
+//                   {message}
+//                 </div>
+//               </div>
+//             )}
+//           </Form>
+//         </Formik>
+//       </div>
+//     </div>
+//   }
+// }
+import React from 'react'
 
 const Register = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [shelter, setShelter] = useState("");
-  const [password2, setPassword2] = useState("");
-
-  const { setToken } = useUserContext();
-  const navigate = useNavigate();
-
-  const handleSignup = async () => {
-    const resp = (await signup({ shelter, email, password, password2 })) as AuthResponse;
-
-    if (resp.status == 200) {
-      setToken(resp.token as string);
-      CustomToast({
-        toastType: "success",
-        title: "Register successfully!",
-      });
-      navigate(path.Profile);
-    } else {
-      CustomToast({
-        toastType: "error",
-        title: resp.msg,
-      });
-    }
-  };
-
   return (
-    <div className="flex justify-center pt-10 text-black">
-      <div className="w-96">
-        <div className="mt-6 grid grid-cols-1 gap-6">
-          <div>Create Email and Password</div>
-          <div>
-            <input
-              type="text"
-              className="styled-input w-full rounded-xl bg-[#D7D7D7] p-3 shadow-lg"
-              placeholder="Address of shelter"
-              value={shelter}
-              onChange={(e) => setShelter(e.target.value)}
-            ></input>
-          </div>
-          <div>
-            <input
-              type="email"
-              className="styled-input w-full rounded-xl bg-[#D7D7D7] p-3 shadow-lg"
-              placeholder="Email"
-              onChange={(e) => setEmail(e.target.value)}
-            ></input>
-          </div>
-          <div>
-            <input
-              type="password"
-              className="styled-input w-full rounded-xl bg-[#D7D7D7] p-3 shadow-lg"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            ></input>
-          </div>
-          <div>
-            <input
-              type="password"
-              className="styled-input w-full rounded-xl bg-[#D7D7D7] p-3 shadow-lg"
-              placeholder="Retype Password"
-              value={password2}
-              onChange={(e) => setPassword2(e.target.value)}
-            ></input>
-          </div>
-          <button
-            className="signUpButtonColor mt-4 w-full rounded-xl py-4 text-white"
-            onClick={handleSignup}
-          >
-            Sign Up
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};
+    <div>
 
-export default Register;
+    </div>
+  )
+}
+
+export default Register

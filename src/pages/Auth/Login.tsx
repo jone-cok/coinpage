@@ -35,17 +35,56 @@ const Login = () => {
   };
 
   return (
-    <section >
-      <div className="card">
-        <div className="card-img" >
+    <section className="container w-full h-full lg:w-[855px] m-auto" >
+      <div className=" flex flex-row w-full opacity-50 bg-[#8ea4a6] rounded-[20px]"  >
+        <div className="img-container" >
         </div>
-        <div className="card-body">
-          <div className="card-upper">
-            agwaegwaeg
+        <div className="bg-codgray">
+          <div className="bg-curiousblue">
+            <div className=" bg-white" style={{ width: "295px", height: "36px", borderRadius: "40px", border: "1px #F2F2F2 solid" }}>
+              tab
+            </div>
+            <div className="">
+              #
+            </div>
           </div>
-          <div className="card-footer">
-            aegwagaweg
+          <div className="">
+            <form className="" >
+              <div>Input Email and Password</div>
+              <div>
+                <input
+                  type="email"
+                  className=" w-full rounded-xl bg-[#D7D7D7] p-3 shadow-2xl"
+                  placeholder="Email"
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
+                ></input>
+              </div>
+              <div>
+                <input
+                  type="password"
+                  className=" w-full rounded-xl bg-[#D7D7D7] p-3 shadow-lg"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
+                ></input>
+              </div>
+              <button
+                className="mt-4 w-full rounded-xl py-4 text-white"
+                onClick={handleLogin}
+              >
+                Login
+              </button>
+            </form>
+            <div style={{ height: "140px" }}>
+              links
+            </div>
           </div>
+
         </div>
       </div>
     </section>
